@@ -15,4 +15,11 @@ function getSkillById(id) {
   return filtered;
 }
 
-module.exports = { getAllSkill, getSkillById };
+function createSkill(title) {
+  array.push({
+    "title": "JS"
+  });
+  return array;
+}
+
+module.exports = { getAllSkill, getSkillById, createSkill };
