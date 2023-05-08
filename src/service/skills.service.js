@@ -15,11 +15,20 @@ function getSkillById(id) {
   return filtered;
 }
 
-function createSkill(title) {
+function createSkillData(title) {
   array.push({
     "title": "JS"
   });
   return array;
 }
 
-module.exports = { getAllSkill, getSkillById, createSkill };
+function upSkillData(id, title) {
+  const filtered = array.filter(elem => elem.id != id);
+  if (filtered.length == array.length) throw new Error('такого id нет');
+  filtered.push({
+    "title": "JS",
+  })
+  return filtered;
+}
+
+module.exports = { getAllSkill, getSkillById, createSkillData, upSkillData };
