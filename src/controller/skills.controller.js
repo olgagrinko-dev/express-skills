@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllSkill, getSkillById, createSkillData, upSkillData } = require('../service/skills.service');
+const { getAllSkill, getSkillById, createSkillData, upSkillData, deleteDataSkill } = require('../service/skills.service');
 
 const router = express.Router();
 
@@ -37,6 +37,16 @@ router.put('/:id', (request, response) => {
     const { id } = request.params;
     const { title } = request.body;
     const data = upSkillData(id, title);
+    response.send(data);
+  } catch (error) {
+    response.send(error.message);
+  }
+});
+
+router.delete('/:id', (request, response) => {
+  try {
+    const { id } = request.params; 
+    const data = deleteDataSkill(id);
     response.send(data);
   } catch (error) {
     response.send(error.message);

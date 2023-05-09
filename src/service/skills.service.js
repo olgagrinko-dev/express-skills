@@ -7,28 +7,46 @@ const array = [
 ];
 
 function getAllSkill() {
+  if (!array.length) throw new Error('Array is empty');
   return array;
 }
 
 function getSkillById(id) {
   const filtered = array.filter(elem => elem.id == id);
+  if (!filtered.length) throw new Error('There is no such id');
   return filtered;
 }
 
 function createSkillData(title) {
   array.push({
-    "title": "JS"
+    id: array.length + 1,
+    "title": "JS",
   });
   return array;
 }
 
 function upSkillData(id, title) {
   const filtered = array.filter(elem => elem.id != id);
-  if (filtered.length == array.length) throw new Error('такого id нет');
+  if (filtered.length == array.length) throw new Error('There is no such id');
   filtered.push({
     "title": "JS",
   })
   return filtered;
 }
 
-module.exports = { getAllSkill, getSkillById, createSkillData, upSkillData };
+function upSkillData(id, title) {
+  const filtered = array.filter(elem => elem.id != id);
+  if (filtered.length == array.length) throw new Error('There is no such id');
+  filtered.push({
+    "title": "JS",
+  })
+  return filtered;
+}
+
+function deleteDataSkill(id) {
+  const filtered = array.filter(elem => elem.id != id);
+  if (filtered.length == array.length) throw new Error('There is no such id');
+  return filtered;
+}
+
+module.exports = { getAllSkill, getSkillById, createSkillData, upSkillData, deleteDataSkill };
