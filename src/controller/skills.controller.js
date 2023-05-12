@@ -1,4 +1,5 @@
 const express = require('express');
+const { isValidId } = require('../helpers/validator.js');
 const { getAllSkill, getSkillById, createSkillData, upSkillData, deleteDataSkill } = require('../service/skills.service');
 
 const router = express.Router();
@@ -6,19 +7,19 @@ const router = express.Router();
 router.get('/', (request, response) => {
   try {
     const data = getAllSkill();
-    response.send(data);
+    response.status(200).send(data);
   } catch (error) {
-    response.send(error.message);
+    response.status(404).send(error.message);
   }
 });
 
-router.get('/:id', (request, response) => {
+router.get('/:id', isValidId, (request, response) => {
   try {
     const { id } = request.params;
     const data = getSkillById(id);
-    response.send(data);
+    response.status(200).send(data);
   } catch (error) {
-    response.send(error.message);
+    response.status(404).send(error.message);
   }
 });
 
@@ -26,30 +27,30 @@ router.post('/', (request, response) => {
   try {
     const { title } = request.body;
     const data = createSkillData(title);
-    response.send(data);
+    response.status(200).send(data);
   } catch (error) {
-    response.send(error.message);
+    response.status(404).send(error.message);
   }
 });
 
-router.put('/:id', (request, response) => {
+router.put('/:id', isValidId, (request, response) => {
   try {
     const { id } = request.params;
     const { title } = request.body;
     const data = upSkillData(id, title);
-    response.send(data);
+    response.status(200).send(data);
   } catch (error) {
-    response.send(error.message);
+    response.status(404).send(error.message);
   }
 });
 
-router.delete('/:id', (request, response) => {
+router.delete('/:id', isValidId, (request, response) => {
   try {
-    const { id } = request.params; 
+    const { id } = request.params;
     const data = deleteDataSkill(id);
-    response.send(data);
+    response.status(200).send(data);
   } catch (error) {
-    response.send(error.message);
+    response.status(404).send(error.message);
   }
 });
 
